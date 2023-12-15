@@ -5,3 +5,4 @@ const callback = (err, data) => {
     console.log(data);
 }
 fs.readFile(file, 'utf8', callback);
+console.log('Print out last!');
