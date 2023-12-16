@@ -1,16 +1,11 @@
-const { rejects } = require('assert');
+const { error } = require('console');
 const fs = require('fs');
 
-const readFile = (file) => {
-    return new Promise((resolve, reject) => {
-        fs.readFile(file, 'utf8', (err, data) => {
-            if (err) reject(err);
-            else resolve(data);
-        });
-    });
-};
+const util = require('util');
 
-// call the async function
-readFile(`${__dirname}/temp/sample.txt`)
+const readFile = util.promisify(fs.readFile)
+
+readFile(`${__dirname}/temp/sample.txt`, 'utf8')
     .then(data => console.log(data))
-    .catch(error => console.log('err: ', error.message));
+    .catch(error => console.log('err: ', error));
+
